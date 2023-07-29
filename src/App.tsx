@@ -46,20 +46,22 @@ function App() {
     </div>
     {loading && <div>Loading</div>}
     {error && <pre>{error.message}</pre>}
-    {(!loading || !error) &&
-      pokemonResponseParser(data?.pokemon_v2_pokemon, searchText)
-        .map(({
-                name,
-                id,
-                imageUrl,
-                types,
-              }: any) => {
-          return <PokemonListTile name={name} key={id} id={id}
-                                  imageUrl={imageUrl}
-                                  types={types}
-                                  backgroundColor={getColorByPokemonType(types[0])}
-          />
-        })}
+    <div className="pokemon-container">
+      {(!loading || !error) &&
+        pokemonResponseParser(data?.pokemon_v2_pokemon, searchText)
+          .map(({
+                  name,
+                  id,
+                  imageUrl,
+                  types,
+                }: any) => {
+            return <PokemonListTile name={name} key={id} id={id}
+                                    imageUrl={imageUrl}
+                                    types={types}
+                                    backgroundColor={getColorByPokemonType(types[0])}
+            />
+          })}
+    </div>
   </>;
 }
 

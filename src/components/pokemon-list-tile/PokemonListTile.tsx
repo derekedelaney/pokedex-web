@@ -9,18 +9,18 @@ type PokemonListTileProps = {
 };
 
 export function PokemonListTile({name, imageUrl, backgroundColor, types, id}: PokemonListTileProps) {
-  return <div style={{backgroundColor}} className="pokemonListTile" tabIndex={id}>
-    <div className="pokemonNumber">#{id}</div>
-    <div className="pokemonName">{name}</div>
-    <div className="pokemonTypes">
+  return <div style={{backgroundColor}} className="pokemon-list-tile" tabIndex={id}>
+    <div className="pokemon-number">#{id}</div>
+    <div className="pokemon-name">{name}</div>
+    <div className="pokemon-types">
       {types.map((type) => {
         return <TypeChip type={type}/>;
       })}
     </div>
-    <img src={imageUrl} alt={`${name} image}`} className="pokemonListTileImg"/>
+    <img src={imageUrl} alt={`${name} image}`} className="pokemon-list-tile-img"/>
   </div>
 }
 
 function TypeChip({type}: { type: string }) {
-  return <div className="typeChip">{type}</div>
+  return <div className="type-chip">{type}</div>
 }
