@@ -1,16 +1,3 @@
-.header {
-  position: sticky;
-  top: 0;
-  height: 8rem;
-  background-color: #f93a3a;
-  text-align: center;
-  padding: 1rem;
-}
-
-.header > img {
-  height: 8rem;
-}
-
 .search-box {
   padding: 1rem;
   padding-bottom: 0;
@@ -37,14 +24,6 @@
 }
 
 @media screen and (max-width: 720px) {
-  .header {
-    height: 4rem;
-  }
-
-  .header > img {
-    height: 4rem;
-  }
-
   .search-bar {
     font-size: 1.5rem;
     padding: 1rem;

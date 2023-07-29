@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
 import './App.css';
-import pokedexLogo from './pokedex.png';
 import {POKEMON_TYPE_COLORS} from "./const";
 import {PokemonListTile} from './components';
 import {gql, useQuery} from "@apollo/client";
+import styled from "styled-components";
 
 interface PokemonListData {
   name: string;
@@ -31,6 +31,37 @@ const POKEMON_LIST_QUERY = gql`{
 }
 `;
 
+const CircularProgressIndicator = styled.div`
+  @property --progress-value {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+
+  @keyframes progress {
+   to { --progress-value: 100; }
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 25vh auto 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side, white 79%, transparent 80% 100%),
+    conic-gradient(#0065a5 calc(var(--progress-value) * 1%), #0065a588 0);
+  animation: progress 1s 1 forwards;
+
+  .&::before {
+    counter-reset: percentage var(--progress-value);
+    content: counter(percentage) '%';
+    animation: progress 1s 1 forwards;
+  }
+`;
+
 function App() {
   const {data, loading, error} = useQuery(POKEMON_LIST_QUERY);
   const [searchText, setSearchText] = useState('');
@@ -40,11 +71,14 @@ function App() {
   }
 
   return <>
-    <div className="header"><img src={pokedexLogo} alt="pokedex logo"/></div>
     <div className="search-box">
-      <input className="search-bar" placeholder="Search" value={searchText} onChange={handleSearchPokemon}/>
+      <input className="search-bar"
+             placeholder="Search"
+             value={searchText}
+             onChange={handleSearchPokemon}
+      />
     </div>
-    {loading && <div>Loading</div>}
+    {loading && <div><CircularProgressIndicator/></div>}
     {error && <pre>{error.message}</pre>}
     <div className="pokemon-container">
       {(!loading || !error) &&
