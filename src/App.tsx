@@ -70,7 +70,9 @@ function pokemonResponseParser(pokemonV2Data: any[], searchText: string): Pokemo
     const imageUrlJson = JSON.parse(pokemon.pokemon_v2_pokemonsprites[0].sprites);
     const imageNameSplit = imageUrlJson.other.home.front_default?.split('/')
     const imageName = imageNameSplit?.[imageNameSplit?.length - 1];
-    const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${imageName}`;
+    const imageUrl = imageName
+      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${imageName}`
+      : 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png';
 
     const types = pokemon.pokemon_v2_pokemontypes.map((type: any) => {
       return type.pokemon_v2_type.name;
