@@ -1,0 +1,48 @@
+.pokemonListTile {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 1fr 1fr;
+  margin: 1.5rem;
+  border-radius: 1.5rem;
+  padding: .5rem;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 .25rem .5rem 0 rgba(0, 0, 0, 0.2), 0 .375rem 1.25rem 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
+.pokemonListTile:focus, .pokemonListTile:focus-visible {
+  outline: .5rem solid #0065a5;
+}
+
+.pokemonNumber {
+  font-size: 3.5rem;
+  color: #FFF;
+  text-align: center;
+  justify-self: center;
+}
+
+.pokemonName {
+  font-size: 3.5rem;
+  text-transform: capitalize;
+  color: #FFF;
+}
+
+.pokemonTypes {
+  justify-self: center;
+}
+
+.typeChip {
+  background-color: rgba(0, 0, 0, 0.18);
+  color: #FFF;
+  padding: .5rem 1rem;
+  margin: .5rem;
+  text-align: center;
+  border-radius: 2rem;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.pokemonListTileImg {
+  width: 8rem;
+  justify-self: center;
+}
