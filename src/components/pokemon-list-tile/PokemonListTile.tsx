@@ -1,24 +1,16 @@
-import './index.css';
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 const StyledPokemonListTile = styled.div<{ color: string }>`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
   border-radius: 1rem;
-  padding: .5rem;
-  align-items: center;
+  padding: 1rem;
   box-shadow: 0 .25rem .5rem 0 rgba(0, 0, 0, 0.2), 0 .375rem 1.25rem 0 rgba(0, 0, 0, 0.19);
   background-color: ${props => props.color};
   height: 100%;
   box-sizing: border-box;
-
-  @media screen and (max-width: 720px) {
-    grid-template-columns: .5fr 2fr 1.5fr 1fr;
-    grid-template-rows: none;
-    grid-gap: .25rem;
-  }
+  color: white;
+  position: relative;
 `;
 
 const StyledLink = styled(Link)`
@@ -26,14 +18,52 @@ const StyledLink = styled(Link)`
   border-radius: 1rem;
 
   &:focus, &:focus-visible {
-    outline: .5rem solid #0065a5;
+    outline: .25rem solid #0065a5;
   }
+`;
 
-  @media screen and (max-width: 720px) {
-    &:focus, &:focus-visible {
-      outline: .25rem solid #0065a5;
-    }
-  }
+const FavoriteButton = styled.button`
+  all: unset;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+`;
+
+const InfoGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const StyledNumber = styled.div`
+  font-size: 1.5rem;
+`;
+
+const StyledName = styled.div`
+  font-size: 2rem;
+  text-transform: capitalize;
+`;
+
+const StyledTypes = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+`;
+
+const TypeChip = styled.div`
+  background-color: rgba(0, 0, 0, 0.18);
+  padding: .25rem 1.25rem;
+  margin-right: .5rem;
+  text-align: center;
+  border-radius: 2rem;
+  font-size: 1rem;
+  text-transform: capitalize;
+`;
+
+const PokemonImage = styled.img`
+  width: 8rem;
+  height: 8rem;
+  margin-right: 1rem;
 `;
 
 type PokemonListTileProps = {
@@ -47,18 +77,21 @@ type PokemonListTileProps = {
 export function PokemonListTile({name, imageUrl, backgroundColor, types, id}: PokemonListTileProps) {
   return <StyledLink to={`pokemon/${id}`} tabIndex={id}>
     <StyledPokemonListTile color={backgroundColor}>
-      <code className="pokemon-number"><span style={{fontSize: '2rem'}}>#</span>{id}</code>
-      <div className="pokemon-name">{name}</div>
-      <div className="pokemon-types">
-        {types.map((type) => {
-          return <TypeChip type={type}/>;
-        })}
-      </div>
-      <img src={imageUrl} alt={`${name} image}`} className="pokemon-list-tile-img"/>
+      <InfoGroup>
+        <FavoriteButton>
+          <span className="material-symbols-outlined">
+            favorite
+          </span>
+        </FavoriteButton>
+        <StyledNumber>#{id}</StyledNumber>
+        <StyledName>{name}</StyledName>
+        <StyledTypes>
+          {types.map((type) => {
+            return <TypeChip>{type}</TypeChip>;
+          })}
+        </StyledTypes>
+      </InfoGroup>
+      <PokemonImage src={imageUrl} alt={`${name} image}`}/>
     </StyledPokemonListTile>
   </StyledLink>
-}
-
-function TypeChip({type}: { type: string }) {
-  return <div className="type-chip">{type}</div>
 }

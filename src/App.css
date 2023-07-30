@@ -5,20 +5,20 @@
 
 .search-bar {
   width: 100%;
-  padding: 2rem;
-  font-size: 3rem;
+  padding: 1rem;
+  font-size: 2rem;
   box-sizing: border-box;
-  border: .5rem solid #FFCC00;
+  border: .25rem solid #FFCC00;
   border-radius: 1rem;
 }
 
 .search-bar:focus, .search-bar:focus-visible {
-  outline: .5rem solid #0065a5;
+  outline: .25rem solid #0065a5;
 }
 
 .pokemon-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   grid-gap: 1rem;
   padding: 1rem;
 }
