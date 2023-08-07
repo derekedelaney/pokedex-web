@@ -1,41 +1,41 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import reportWebVitals from "./reportWebVitals";
-import {PokemonDetail} from "./components";
-import {Header} from "./components/header/Header";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+import { PokemonDetail } from './components';
+import { Header } from './components/header/Header';
 
 const client = new ApolloClient({
-  uri: "https://beta.pokeapi.co/graphql/v1beta",
-  cache: new InMemoryCache()
+  uri: 'https://beta.pokeapi.co/graphql/v1beta',
+  cache: new InMemoryCache(),
 });
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
-    element: <App/>
+    element: <App />,
   },
   {
     path: 'pokemon/:id',
-    element: <PokemonDetail/>,
-    loader: async ({params}) => {
+    element: <PokemonDetail />,
+    loader: async ({ params }) => {
       return fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`);
     },
-  }
+  },
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <Header/>
-      <RouterProvider router={router}/>
+      <Header />
+      <RouterProvider router={router} />
     </ApolloProvider>
   </React.StrictMode>
 );
